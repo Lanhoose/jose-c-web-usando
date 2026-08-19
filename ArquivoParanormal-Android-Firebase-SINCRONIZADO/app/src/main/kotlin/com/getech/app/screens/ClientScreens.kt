@@ -48,7 +48,5 @@ fun ChatbotScreen(repo:LocalRepository,onBack:()->Unit){
   Spacer(Modifier.height(8.dp))
   LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(8.dp)){itemsIndexed(messages){i,m->Surface(color=if(i%2==0)MaterialTheme.colorScheme.surfaceVariant else Color(0xFF12506A),shape=MaterialTheme.shapes.medium){Text(m,color=Color.White,modifier=Modifier.padding(12.dp))}}}
   Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){OutlinedTextField(input,{input=it},Modifier.weight(1f),placeholder={Text(if(step>=3)"Atendimento concluído." else "Digite sua resposta...")},enabled=step<3,singleLine=true);Button(onClick=::send,enabled=step<3){Text("Enviar")}}
- }
-  }
- }
+ }}
 }
