@@ -1,0 +1,56 @@
+workflows:
+  android-debug-apk:
+    name: GeTech - APK Debug v5.2
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+
+    environment:
+      java: 17
+
+    scripts:
+      - name: Verificar projeto
+        script: |
+          echo "=== RAIZ ==="
+          pwd
+          echo "=== ARQUIVOS ==="
+          find . -maxdepth 2 -type f | sort | head -200
+
+      - name: Preparar Gradle
+        script: |
+          if [ -f "./gradlew" ]; then
+            chmod +x ./gradlew
+            ./gradlew --version
+          else
+            echo "Gradle Wrapper não encontrado na raiz."
+            echo "Tentando Gradle instalado no ambiente:"
+            gradle --version
+          fi
+
+      - name: Limpar projeto
+        script: |
+          if [ -f "./gradlew" ]; then
+            ./gradlew clean --no-daemon --stacktrace --refresh-dependencies
+          else
+            gradle clean --no-daemon --stacktrace --refresh-dependencies
+          fi
+
+      - name: Gerar APK Debug
+        script: |
+          if [ -f "./gradlew" ]; then
+            ./gradlew assembleDebug --no-daemon --stacktrace --refresh-dependencies
+          else
+            gradle assembleDebug --no-daemon --stacktrace --refresh-dependencies
+          fi
+
+      - name: Validar APK
+        script: |
+          APK="app/build/outputs/apk/debug/app-debug.apk"
+          if [ ! -f "$APK" ]; then
+            echo "ERRO: APK não encontrado em $APK"
+            find app/build/outputs -type f 2>/dev/null || true
+            exit 1
+          fi
+          ls -lh "$APK"
+
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
