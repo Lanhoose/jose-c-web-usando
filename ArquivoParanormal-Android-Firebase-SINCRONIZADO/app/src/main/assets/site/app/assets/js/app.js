@@ -28,7 +28,7 @@ window.BASE_URL = "file:///android_asset/site";
 //  3. PROTEÇÃO DE TELA / LOGIN
 // ==========================================================================
 if (localStorage.getItem('logado') !== 'true') {
-    window.location.href = `${window.BASE_URL}/public/pages/index.html`;
+    window.location.href = `${window.BASE_URL}/public/pages/login.html`;
 }
 
 // ==========================================================================
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
     localStorage.removeItem('logado');
     localStorage.removeItem('usuarioAtual');
-    window.location.href = `${window.BASE_URL}/public/pages/index.html`;
+    window.location.href = `${window.BASE_URL}/public/pages/login.html`;
 }
 
 // ==========================================================================
