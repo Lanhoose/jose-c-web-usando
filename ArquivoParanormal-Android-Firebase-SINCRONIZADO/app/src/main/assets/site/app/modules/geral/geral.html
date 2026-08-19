@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeTech - Documentação Técnica do ERP</title>
+    <link rel="stylesheet" href="../../assets/css/geral.css">
+</head>
+<body>
+
+    <div class="topbar">
+        <div>
+            <h1>GeTech <span>Technical Central</span></h1>
+            <div class="topbar-meta">Documentação Técnica v1.0</div>
+        </div>  
+        <div class="topbar-right">
+            <span class="badge-version">v1.0</span>
+            <span class="badge-status">Em desenvolvimento</span>
+            <a href="../../app.html" class="btn-topbar">Voltar ao Início</a>
+            
+            <div class="theme-toggle-wrap">
+                <span class="theme-icon" id="themeIcon">🌙</span>
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/acessibilidade.js"></script>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" id="btn-aba-visao" onclick="trocarAba('visao')"><i class="fas fa-home"></i> Visão Geral</button>
+        <button class="tab-btn" id="btn-aba-arquitetura" onclick="trocarAba('arquitetura')"><i class="fas fa-project-diagram"></i> Arquitetura</button>
+        <button class="tab-btn" id="btn-aba-estrutura" onclick="trocarAba('estrutura')"><i class="fas fa-sitemap"></i> Estrutura de Pastas</button>
+        <button class="tab-btn" id="btn-aba-modulos" onclick="trocarAba('modulos')"><i class="fas fa-cubes"></i> Módulos & Páginas</button>
+        <button class="tab-btn" id="btn-aba-desenvolvimento" onclick="trocarAba('desenvolvimento')"><i class="fas fa-code"></i> Desenvolvimento</button>
+    </div>
+
+    <main class="main-content">
+
+        <div id="tela-visao" class="panel-card">
+            <div class="doc-section">
+                <h2><i class="fas fa-rocket"></i> Introdução ao Sistema</h2>
+                <p>Sistema de gestão industrial desenvolvido como projeto educacional, simulando um ERP real com múltiplos módulos. Dividido em <strong>site público</strong> (institucional), <strong>app interno</strong> (protegido por autenticação) e <strong>Site C</strong> (portal de acesso direto ao cliente).</p>
+                <div class="intro-grid">
+                    <div class="intro-card">
+                        <div class="label">Linguagem</div>
+                        <div class="value">HTML, CSS, JavaScript puro</div>
+                    </div>
+                    <div class="intro-card">
+                        <div class="label">Armazenamento</div>
+                        <div class="value">localStorage / sessionStorage</div>
+                    </div>
+                    <div class="intro-card">
+                        <div class="label">Servidor necessário</div>
+                        <div class="value">Live Server (VS Code) ou qualquer HTTP</div>
+                    </div>
+                    <div class="intro-card">
+                        <div class="label">Dependências externas</div>
+                        <div class="value">Nenhuma (zero bibliotecas)</div>
+                    </div>
+                </div>
+                <div class="alert-box">
+                    <span class="icon">⚠️</span>
+                    <span>Use a extensão <strong>Live Server</strong> no VS Code e abra <code>public/pages/index.html</code>. O <code>fetch()</code> dos componentes requer protocolo HTTP — abrir direto no navegador não funciona.</span>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-layer-group"></i> Tecnologias Utilizadas</h2>
+                <table class="tech-table">
+                    <thead>
+                        <tr><th>Tecnologia</th><th>Uso no Projeto</th><th>Onde Aparece</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>HTML5</code></td><td>Estrutura de todas as páginas e componentes</td><td>Todos os arquivos <code>.html</code></td></tr>
+                        <tr><td><code>CSS3</code></td><td>Estilização, Flexbox e Grid</td><td><code>assets/css/</code></td></tr>
+                        <tr><td><code>JavaScript ES6</code></td><td>Lógica de autenticação, componentes, módulos</td><td><code>assets/js/</code></td></tr>
+                        <tr><td><code>Fetch API</code></td><td>Carregamento dinâmico de header/footer</td><td><code>component.js</code></td></tr>
+                        <tr><td><code>localStorage</code></td><td>Persistência de usuário e dados de estoque</td><td><code>login.js</code>, <code>estoque.js</code></td></tr>
+                        <tr><td><code>DOM API</code></td><td>Manipulação dinâmica de tabelas e telas SPA</td><td><code>estoque.js</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="tela-arquitetura" class="panel-card" style="display:none;">
+            <div class="doc-section">
+                <h2><i class="fas fa-map"></i> Mapa do Sistema</h2>
+                <p>Fluxo completo de navegação — do visitante anônimo até os módulos do ERP. O projeto é dividido em três zonas principais:</p>
+
+                <div class="map-grid">
+                    <div class="map-zone">
+                        <div class="map-zone-title public-c"><i class="fas fa-globe"></i> public/ — Site Institucional</div>
+                        <div class="map-page"><span class="map-page-name">index.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">login.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">sobre.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">funcionalidades.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">planos.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">depoimentos.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">integracoes.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">faq.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">blog.html</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">contato.html</span><span class="status-badge done">✓ pronto</span></div>
+                    </div>
+                    <div class="map-zone">
+                        <div class="map-zone-title app-c"><i class="fas fa-lock"></i> app/ — Dashboard ERP</div>
+                        <div class="map-page"><span class="map-page-name">app.html</span><span class="map-page-desc">Dashboard</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/estoque/</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/producao/</span><span class="status-badge empty">📁 vazia</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/manutencao/</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/rh_ponto/</span><span class="status-badge done">✓ pronto</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/pedidos/</span><span class="status-badge notcreated">✗ não criado</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/qualidade/</span><span class="status-badge notcreated">✗ não criado</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/suprimentos/</span><span class="status-badge notcreated">✗ não criado</span></div>
+                        <div class="map-page"><span class="map-page-name">modules/treinamento/</span><span class="status-badge notcreated">✗ não criado</span></div>
+                    </div>
+                    <div class="map-zone">
+                        <div class="map-zone-title sitec-c"><i class="fas fa-store"></i> Site C/ — Portal Cliente</div>
+                        <div class="map-page"><span class="map-page-name">home.html</span><span class="map-page-desc">Página inicial</span></div>
+                        <div class="map-page"><span class="map-page-name">login.html</span><span class="map-page-desc">Acesso</span></div>
+                        <div class="map-page"><span class="map-page-name">loginreal.html</span><span class="map-page-desc">Login real</span></div>
+                        <div class="map-page"><span class="map-page-name">cadastro.html</span><span class="map-page-desc">Cadastro</span></div>
+                        <div class="map-page"><span class="map-page-name">Contato.html</span><span class="map-page-desc">Contato</span></div>
+                        <div class="map-page"><span class="map-page-name">material.html</span><span class="map-page-desc">Materiais</span></div>
+                        <div class="map-page"><span class="map-page-name">orçamento.html</span><span class="map-page-desc">Orçamento</span></div>
+                        <div class="map-page"><span class="map-page-name">perfil.jpg</span><span class="map-page-desc">Asset</span></div>
+                        <div class="map-page"><span class="map-page-name">Getech.png</span><span class="map-page-desc">Logo</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-puzzle-piece"></i> Sistema de Componentes</h2>
+                <p>Header e footer são carregados via <code>fetch()</code> em todas as páginas públicas. Evita duplicação de código.</p>
+                <div class="code-block">
+<span class="cm">// component.js</span>
+<span class="kw">function</span> <span class="fn">carregarComponente</span>(id, arquivo) {
+  <span class="fn">fetch</span>(arquivo)
+    .then(res =&gt; res.<span class="fn">text</span>())
+    .then(data => { document.<span class="fn">getElementById</span>(id).innerHTML = data; });
+}
+
+document.<span class="fn">addEventListener</span>(<span class="str">"DOMContentLoaded"</span>, () => {
+  <span class="fn">carregarComponente</span>(<span class="str">"header"</span>, <span class="str">"../components/header.html"</span>);
+  <span class="fn">carregarComponente</span>(<span class="str">"footer"</span>, <span class="str">"../components/footer.html"</span>);
+});
+                </div>
+                <div class="alert-box">
+                    <span class="icon">⚠️</span>
+                    <span>O <code>fetch()</code> é bloqueado quando o arquivo é aberto via <code>file://</code>. Use sempre um servidor HTTP.</span>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-shield-alt"></i> Autenticação</h2>
+                <table class="auth-table">
+                    <thead>
+                        <tr><th>Etapa</th><th>Arquivo</th><th>O que acontece</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1. Cadastro</td><td><code>login.js</code></td><td>Salva <code>{email, senha}</code> no localStorage como JSON</td></tr>
+                        <tr><td>2. Login</td><td><code>login.js</code></td><td>Compara credenciais, seta <code>logado: "true"</code> e redireciona</td></tr>
+                        <tr><td>3. Proteção</td><td><code>app.js</code></td><td>Verifica <code>logado === "true"</code> ao carregar; redireciona se falso</td></tr>
+                        <tr><td>4. Logout</td><td><code>app.js</code></td><td>Remove a chave <code>logado</code> e volta para index</td></tr>
+                    </tbody>
+                </table>
+                <div class="alert-box" style="margin-top:16px;">
+                    <span class="icon">💡</span>
+                    <span>Desafio da aula: migrar de <code>localStorage</code> para <code>sessionStorage</code>. A diferença: sessionStorage é apagado ao fechar a aba.</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="tela-estrutura" class="panel-card" style="display:none;">
+            <div class="doc-section">
+                <h2><i class="fas fa-folder-tree"></i> Arquitetura e Mapeamento de Diretórios</h2>
+                <p>Ambiente mapeado dinamicamente via automação com GitHub Actions. O arquivo <code>estrutura.json</code> alimenta o componente visual abaixo em tempo de execução.</p>
+
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-dot" style="background:#2ecc71"></div><span>Zona Pública (public)</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#3498db"></div><span>Zona App (app)</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#9b59b6"></div><span>Site C (portal cliente)</span></div>
+                </div>
+
+                <div class="folder-wrapper" style="margin-top:24px;" id="arvore-pastas">
+                    <p style="color: var(--text-muted); font-style: italic;"><i class="fas fa-spinner fa-spin"></i> Carregando mapeamento de diretórios...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tela-modulos" class="panel-card" style="display:none;">
+            <div class="doc-section">
+                <h2><i class="fas fa-globe"></i> Páginas do Site Público</h2>
+                <table class="tech-table">
+                    <thead><tr><th>Página</th><th>Arquivo</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>Home</td><td><code>index.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Login / Cadastro</td><td><code>login.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Sobre</td><td><code>sobre.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Funcionalidades</td><td><code>funcionalidades.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Planos</td><td><code>planos.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Depoimentos</td><td><code>depoimentos.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Integrações</td><td><code>integracoes.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>FAQ</td><td><code>faq.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Blog</td><td><code>blog.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Contato</td><td><code>contato.html</code></td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-cubes"></i> Módulos ERP</h2>
+                <table class="tech-table">
+                    <thead><tr><th>Módulo</th><th>Caminho</th><th>Conceito</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>Estoque</td><td><code>modules/estoque/estoque.html</code></td><td>SPA + localStorage</td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Produção</td><td><code>modules/producao/</code></td><td>—</td><td><span class="status-badge empty">📁 pasta vazia</span></td></tr>
+                        <tr><td>Manutenção</td><td><code>modules/manutencao/manutencao.html</code></td><td>Controle corretivo/preventivo</td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>RH / Ponto</td><td><code>modules/rh/rh.html</code></td><td>Gestão de funcionários + ponto integrado</td><td><span class="status-badge done">✓ pronto</span></td></tr>
+                        <tr><td>Pedidos / OS</td><td><code>modules/pedidos/</code></td><td>—</td><td><span class="status-badge notcreated">✗ não criado</span></td></tr>
+                        <tr><td>Qualidade</td><td><code>modules/qualidade/</code></td><td>—</td><td><span class="status-badge notcreated">✗ não criado</span></td></tr>
+                        <tr><td>Suprimentos</td><td><code>modules/suprimentos/</code></td><td>—</td><td><span class="status-badge notcreated">✗ não criado</span></td></tr>
+                        <tr><td>Treinamento</td><td><code>modules/treinamento/</code></td><td>—</td><td><span class="status-badge notcreated">✗ não criado</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-store" style="color:#9b59b6;"></i> Páginas do Site C</h2>
+                <p>Portal direto do cliente, no mesmo nível hierárquico de <code>app/</code> e <code>public/</code>, sem dependência do sistema de componentes do site público.</p>
+                <table class="tech-table">
+                    <thead><tr><th>Página</th><th>Arquivo</th><th>Descrição</th></tr></thead>
+                    <tbody>
+                        <tr><td>Home</td><td><code>home.html</code></td><td>Entrada principal do portal cliente</td></tr>
+                        <tr><td>Login</td><td><code>login.html</code></td><td>Tela de acesso ao portal</td></tr>
+                        <tr><td>Login Real</td><td><code>loginreal.html</code></td><td>Autenticação efetiva</td></tr>
+                        <tr><td>Cadastro</td><td><code>cadastro.html</code></td><td>Registro de novo cliente</td></tr>
+                        <tr><td>Contato</td><td><code>Contato.html</code></td><td>Formulário de contato</td></tr>
+                        <tr><td>Materiais</td><td><code>material.html</code></td><td>Catálogo de materiais</td></tr>
+                        <tr><td>Orçamento</td><td><code>orçamento.html</code></td><td>Solicitação de orçamento</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="tela-desenvolvimento" class="panel-card" style="display:none;">
+            <div class="doc-section">
+                <h2><i class="fas fa-plus-circle"></i> Como Criar uma Nova Página Pública</h2>
+
+                <p><strong>1. Copie o template</strong></p>
+                <div class="code-block">cp public/pages/_template.html public/pages/minha-pagina.html</div>
+
+                <p><strong>2. Estrutura mínima obrigatória</strong></p>
+                <div class="code-block">&lt;<span class="kw">div</span> id=<span class="str">"header"</span>&gt;&lt;/div&gt; <span class="cm">&lt;!-- carregado pelo component.js --&gt;</span>
+&lt;<span class="kw">main</span> class=<span class="str">"container"</span>&gt;
+  <span class="cm">&lt;!-- conteúdo da página --&gt;</span>
+&lt;/main&gt;
+&lt;<span class="kw">div</span> id=<span class="str">"footer"</span>&gt;&lt;/div&gt; <span class="cm">&lt;!-- carregado pelo component.js --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="str">"../assets/js/component.js"</span>&gt;&lt;/script&gt;</div>
+
+                <p><strong>3. Adicione no header</strong></p>
+                <div class="info-box">Edite <code>public/components/header.html</code> e adicione o link na tag <code>&lt;nav&gt;</code>.</div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-cogs"></i> Como Criar um Novo Módulo ERP</h2>
+
+                <p><strong>1. Crie a pasta e arquivo</strong></p>
+                <div class="code-block">app/modules/<span class="str">nome-modulo</span>/<span class="str">nome-modulo</span>.html</div>
+
+                <p><strong>2. Importe o CSS global do app</strong></p>
+                <div class="code-block">&lt;<span class="kw">link</span> rel=<span class="str">"stylesheet"</span> href=<span class="str">"/app/assets/css/global.css"</span>&gt;</div>
+
+                <p><strong>3. Adicione o card no dashboard (app.html)</strong></p>
+                <div class="code-block">&lt;<span class="kw">div</span> class=<span class="str">"card"</span> onclick=<span class="str">"abrirModulo('nome-modulo')"</span>&gt;
+  &lt;<span class="kw">h3</span>&gt;Nome do Módulo&lt;/<span class="kw">h3</span>&gt;
+  &lt;<span class="kw">p</span>&gt;Descrição breve.&lt;/<span class="kw">p</span>&gt;
+&lt;/<span class="kw">div</span>&gt;
+<span class="cm">// app.js monta o caminho automaticamente:</span>
+<span class="cm">// /app/modules/nome-modulo/nome-modulo.html</span></div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-store" style="color:#9b59b6;"></i> Como Expandir o Site C</h2>
+                <p>O Site C é independente — não utiliza o sistema de componentes de <code>public/</code>. Cada nova página deve ser criada diretamente na raiz de <code>Site C/</code>.</p>
+                <div class="code-block"><span class="cm">// Estrutura de uma nova página no Site C</span>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="kw">html</span> lang=<span class="str">"pt-br"</span>&gt;
+&lt;<span class="kw">head</span>&gt;
+  <span class="cm">&lt;!-- CSS próprio do Site C --&gt;</span>
+&lt;/head&gt;
+&lt;<span class="kw">body</span>&gt;
+  <span class="cm">&lt;!-- header manual (sem fetch) --&gt;</span>
+  <span class="cm">&lt;!-- conteúdo --&gt;</span>
+  <span class="cm">&lt;!-- footer manual --&gt;</span>
+&lt;/<span class="kw">body</span>&gt;</div>
+                <div class="info-box">
+                    <strong>Nota:</strong> Como o Site C não usa <code>component.js</code>, cabeçalhos e rodapés devem ser replicados manualmente em cada página ou extraídos para um componente próprio do Site C.
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-clipboard-list"></i> Pendências Restantes</h2>
+                <table class="tech-table">
+                    <thead><tr><th>Item / Funcionalidade</th><th>Tipo de Escopo</th><th>Prioridade</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>Migrar motor de autenticação para <code>sessionStorage</code></td>
+                            <td>Desafio da aula</td>
+                            <td><span class="priority-badge alta">Alta</span></td>
+                        </tr>
+                        <tr>
+                            <td>Implementar módulo Produção</td>
+                            <td>Módulo ERP</td>
+                            <td><span class="priority-badge media">Média</span></td>
+                        </tr>
+                        <tr>
+                            <td>Padronizar header/footer do Site C</td>
+                            <td>Site C</td>
+                            <td><span class="priority-badge media">Média</span></td>
+                        </tr>
+                        <tr>
+                            <td>Demais módulos ERP (Pedidos, Qualidade, Suprimentos...)</td>
+                            <td>Módulos ERP</td>
+                            <td><span class="priority-badge baixa">Baixa</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+     const sessao = JSON.parse(localStorage.getItem('sessaoGeTech'));
+    const BASE_URL = window.location.origin + "/GeTech";
+
+    // Se não houver sessão, se não estiver ativo, ou se o perfil NÃO for gestor
+    if (!sessao || !sessao.loginAtivo || sessao.perfil !== 'gestor') {
+        alert("Acesso restrito. Apenas gestores podem acessar este painel.");
+        // Redireciona para a página de login
+        window.location.href = `${BASE_URL}/site/Site C/pages/index.html`;
+        return; // Para a execução do resto do script
+    }
+});
+
+        // TROCA DE ABAS
+        const trocarAba = (tela) => {
+            const mapa = {
+                visao:         ['tela-visao',         'btn-aba-visao'],
+                arquitetura:   ['tela-arquitetura',   'btn-aba-arquitetura'],
+                estrutura:     ['tela-estrutura',     'btn-aba-estrutura'],
+                modulos:       ['tela-modulos',       'btn-aba-modulos'],
+                desenvolvimento: ['tela-desenvolvimento', 'btn-aba-desenvolvimento']
+            };
+            Object.entries(mapa).forEach(([key, [panelId, btnId]]) => {
+                const panel = document.getElementById(panelId);
+                const btn   = document.getElementById(btnId);
+                if (panel) panel.style.display = (key === tela) ? 'block' : 'none';
+                if (btn)   btn.classList.toggle('active', key === tela);
+            });
+        };
+
+        // TOGGLE PASTAS (Otimizado para funcionar com elementos estáticos e dinâmicos)
+        const toggleFolder = (el) => {
+            const content = el.nextElementSibling;
+            if (!content || !content.classList.contains('folder-content')) return;
+            const isCollapsed = content.classList.toggle('hidden');
+            el.classList.toggle('collapsed', isCollapsed);
+            const icon = el.querySelector('.fa-folder, .fa-folder-open');
+            if (icon) {
+                icon.classList.toggle('fa-folder', isCollapsed);
+                icon.classList.toggle('fa-folder-open', !isCollapsed);
+            }
+        };
+
+        // RENDERIZAÇÃO DINÂMICA DA ÁRVORE DE PASTAS
+        function gerarHTMLEstrutura(item) {
+            let nomeExibido = item.name;
+            let labelZona = '';
+
+            // Condição ajustada para aceitar o nome customizado se for diferente de fallbacks comuns
+            if (item.type === "root") {
+                if (nomeExibido === "versão préfinal" || nomeExibido === "." || nomeExibido === "workspace") {
+                    nomeExibido = "raiz do projeto";
+                }
+                labelZona = '<span class="zone-label zone-root">raiz</span>';
+            } else if (nomeExibido === "app") {
+                labelZona = '<span class="zone-label zone-app">sistema ERP</span>';
+            } else if (nomeExibido === "public") {
+                labelZona = '<span class="zone-label zone-public">site institucional</span>';
+            } else if (nomeExibido === "Site C") {
+                labelZona = '<span class="zone-label zone-sitec">portal cliente</span>';
+            }
+
+            if (item.type === "file") {
+                let icone = 'fa-file';
+                let cor = 'var(--text-muted)';
+                
+                if (nomeExibido.endsWith('.html')) { icone = 'fab fa-html5'; cor = '#e67e22'; }
+                else if (nomeExibido.endsWith('.css')) { icone = 'fab fa-css3-alt'; cor = '#3498db'; }
+                else if (nomeExibido.endsWith('.js')) { icone = 'fab fa-js-square'; cor = '#f1c40f'; }
+                else if (nomeExibido.endsWith('.md')) { icone = 'fab fa-markdown'; cor = '#42a5f5'; }
+                else if (nomeExibido.endsWith('.png') || nomeExibido.endsWith('.jpg')) { icone = 'fas fa-image'; cor = '#e67e22'; }
+
+                return `<div class="file-item"><i class="${icone}" style="color: ${cor};"></i> ${nomeExibido}</div>`;
+            }
+
+            if (item.type === "folder" || labelZona !== '') {
+                let filhosHTML = '';
+                if (item.children && item.children.length > 0) {
+                    filhosHTML = item.children.map(gerarHTMLEstrutura).join('');
+                } else {
+                    filhosHTML = `<div class="file-item" style="color:var(--priority-med);"><i class="fas fa-exclamation-triangle"></i> pasta vazia</div>`;
+                }
+                
+                let estiloNome = (nomeExibido === 'app') ? 'color:#3498db;' : (nomeExibido === 'public') ? 'color:#2ecc71;' : (nomeExibido === 'Site C') ? 'color:#9b59b6;' : '';
+
+                return `
+                    <div class="folder-title" onclick="toggleFolder(this)">
+                        <i class="fas fa-folder"></i>
+                        <span class="folder-label" style="${estiloNome}">${nomeExibido} ${labelZona}</span>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="folder-content">
+                        ${filhosHTML}
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        // TEMA E INICIALIZAÇÃO DO FETCH
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn  = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const aplicar = (tema) => {
+                document.documentElement.setAttribute('data-theme', tema);
+                localStorage.setItem('theme', tema);
+                if (icon) icon.textContent = tema === 'dark' ? '🌙' : '☀️';
+            };
+            aplicar(localStorage.getItem('theme') || 'dark');
+            if (btn) btn.addEventListener('click', () => {
+                aplicar(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            });
+
+            fetch('estrutura.json')
+                .then(res => {
+                    if (!res.ok) throw new Error("Arquivo json não encontrado");
+                    return res.json();
+                })
+                .then(dados => {
+                    const container = document.getElementById('arvore-pastas');
+                    if (container) {
+                        container.innerHTML = gerarHTMLEstrutura(dados);
+                    }
+                })
+                .catch(err => {
+                    console.error("Erro ao carregar estrutura:", err);
+                    const container = document.getElementById('arvore-pastas');
+                    if (container) {
+                        container.innerHTML = `
+                            <div class="alert-box" style="background: rgba(239,68,68,0.08); border-left: 4px solid var(--priority-high);">
+                                <span class="icon">❌</span>
+                                <span>Erro ao carregar <code>estrutura.json</code>. Certifique-se de que a Action do GitHub rodou com sucesso ou que está utilizando um servidor HTTP local (Live Server).</span>
+                            </div>
+                        `;
+                    }
+                });
+        });
+    </script>
+    <script src="../../assets/js/logs.js"></script>
+</body>
+</html>

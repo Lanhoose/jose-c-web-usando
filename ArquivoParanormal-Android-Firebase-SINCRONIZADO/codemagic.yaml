@@ -1,0 +1,11 @@
+workflows:
+  getech-android:
+    name: GeTech Android v2
+    max_build_duration: 30
+    environment:
+      java: 17
+    scripts:
+      - name: Build Debug APK
+        script: ./gradlew --no-daemon clean assembleDebug
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
