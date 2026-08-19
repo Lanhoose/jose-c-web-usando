@@ -1,0 +1,41 @@
+HIERARQUIA GE TECH V6.1
+
+A navegação foi ajustada para refletir a arquitetura real do projeto Web:
+
+1. SITE C = HOME INICIAL
+   - HomeScreen representa a entrada principal.
+   - Não abre `site/public` diretamente.
+   - Login/cadastro continuam disponíveis.
+
+2. LOGIN DO SITE C
+   - Cliente -> Área do Cliente.
+   - Gestor -> Área pública interna (`PublicPortal`).
+
+3. PUBLIC
+   - É uma camada protegida.
+   - Somente sessão com role=gestor pode acessá-la.
+   - Sem sessão ou com role=cliente, qualquer tentativa retorna para Site C.
+   - Não há URLs/WebView.
+
+4. PUBLIC -> APP
+   - O botão "Entrar no ERP / App" leva para o painel ERP nativo.
+   - O painel ERP representa `site/app/app.html`.
+   - Os módulos existentes do app são acessados internamente.
+
+5. APP -> MÓDULOS
+   - geral
+   - estoque
+   - manutencao
+   - rh
+   - pedidos
+   - qualidade
+   - suprimentos
+   - producao
+   - logs
+   - sistema
+
+6. CLIENTE
+   - Não entra em Public nem no ERP administrativo.
+   - Continua restrito ao portal de Cliente, Chatbot e AR.
+
+Tudo continua local e sem Firebase.

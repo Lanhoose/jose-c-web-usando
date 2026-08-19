@@ -1,0 +1,12 @@
+GeTech v5.1 build fix
+
+The previous build failure was caused by incorrect Maven artifact IDs in gradle/libs.versions.toml:
+- activityCompose -> activity-compose
+- lifecycleRuntimeKtx -> lifecycle-runtime-ktx
+- composeBom -> compose-bom
+- navigationCompose -> navigation-compose
+
+The Compose BOM 2025.08.00 is a valid stable BOM. Java target was also aligned to JDK 17,
+matching the Codemagic environment.
+
+Firebase remains disabled.

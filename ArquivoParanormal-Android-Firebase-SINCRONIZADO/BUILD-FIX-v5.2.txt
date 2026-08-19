@@ -1,0 +1,10 @@
+v5.2 build correction
+
+Fixed compile errors reported by Codemagic:
+- Added missing ui/GeTechApp.kt native route coordinator.
+- Rewrote ClientScreens.kt to remove malformed braces and added Color import.
+- Fixed ManagerScreens.kt ticket timestamp: Ticket has createdAt, not date.
+- Added sp import to PublicScreens.kt.
+- Added explicit material-icons-extended version.
+- Opted into ExperimentalMaterial3Api for TopAppBar.
+- No WebView, HTML, file:// or Firebase added.
