@@ -1,0 +1,50 @@
+workflows:
+  android-debug-apk:
+    name: Arquivo Paranormal - APK Debug
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+
+    environment:
+      java: 21
+
+    scripts:
+      - name: Configurar projeto
+        script: |
+          cd ArquivoParanormal-Android-Firebase-SINCRONIZADO
+          chmod +x gradlew
+
+      - name: Configurar Firebase
+        script: |
+          cd ArquivoParanormal-Android-Firebase-SINCRONIZADO
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("app/google-services.json").read_text())
+
+          project = data.get("project_info", {})
+          client = data.get("client", [{}])[0]
+          client_info = client.get("client_info", {})
+          api_keys = client.get("api_key", [])
+
+          values = {
+              "firebase.apiKey": api_keys[0].get("current_key", "") if api_keys else "",
+              "firebase.appId": client_info.get("mobilesdk_app_id", ""),
+              "firebase.projectId": project.get("project_id", ""),
+              "firebase.messagingSenderId": project.get("project_number", ""),
+              "firebase.storageBucket": project.get("storage_bucket", "")
+          }
+
+          Path("local.properties").write_text(
+              "\n".join(f"{key}={value}" for key, value in values.items()) + "\n"
+          )
+          PY
+
+      - name: Gerar APK
+        script: |
+          cd ArquivoParanormal-Android-Firebase-SINCRONIZADO
+          ./gradlew assembleDebug --stacktrace
+
+    artifacts:
+      - ArquivoParanormal-Android-Firebase-SINCRONIZADO/app/build/outputs/apk/debug/app-debug.apk
