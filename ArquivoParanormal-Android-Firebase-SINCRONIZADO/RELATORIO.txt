@@ -1,0 +1,19 @@
+RELATÓRIO — GETECH ANDROID v2
+
+ATUALIZADO:
+- A árvore original site/public foi incorporada ao APK, preservando páginas, CSS, JS e componentes.
+- A árvore original site/app foi incorporada, preservando dashboard e módulos.
+- Site C/public index é a entrada inicial.
+- Hierarquia Gestor/Cliente foi mantida e reforçada.
+- Login/cadastro usam armazenamento local.
+- Chatbot original do Site C foi mantido.
+- AR original foi mantida.
+- Foram adicionados módulos faltantes (Qualidade, Suprimentos e Produção) porque o app.html original já apontava para eles.
+- Firebase não é usado.
+- Codemagic gera o APK via Gradle.
+
+LIMITAÇÕES:
+- Dados são somente locais; não existe sincronização entre aparelhos.
+- AR espacial depende de hardware/ARCore e conteúdo/modelos apropriados.
+- Algumas bibliotecas do site original são carregadas por CDN; portanto recursos externos exigem internet.
+- O módulo original "Sistema em Python" depende de Pyodide e pode ter limitações de desempenho em aparelhos móveis.

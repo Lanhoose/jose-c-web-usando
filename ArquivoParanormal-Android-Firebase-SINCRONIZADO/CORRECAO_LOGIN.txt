@@ -1,0 +1,17 @@
+CORREÇÃO v4
+
+Causa do bloqueio:
+- public/assets/js/index.js tinha sido contaminado com uma trava exclusiva de Gestor.
+- public/assets/js/component.js também tinha a mesma trava, impedindo até o carregamento do header.
+- public/assets/js/login.js tinha a trava de Gestor, portanto login/cadastro nunca eram alcançados.
+- app.html possuía caminhos ../app/assets incorretos dentro de site/app.
+
+Corrigido:
+- public é público: visitantes podem abrir index, páginas institucionais, login e cadastro.
+- login/cadastro funcionam localmente.
+- Gestor -> site/app/app.html.
+- Cliente -> site/public/pages/cliente.html.
+- app interno continua protegido exclusivamente para Gestor.
+- componentes header/footer têm fallback embutido para funcionar no WebView file://.
+- caminhos dos scripts do app.html corrigidos.
+- Firebase continua ausente.

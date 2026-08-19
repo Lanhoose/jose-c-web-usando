@@ -1,0 +1,3 @@
+<resources><style name="Theme.GeTech" parent="Theme.AppCompat.DayNight.NoActionBar">
+<item name="android:fontFamily">sans</item><item name="android:statusBarColor">#07111f</item><item name="android:navigationBarColor">#07111f</item>
+</style></resources>
