@@ -1,17 +1,22 @@
-# GeTech Android v2 — conversão fiel de public + app
+# GeTech — aplicativo nativo
 
-Esta versão usa diretamente a árvore original `site/public` e `site/app` do ZIP GeTech como conteúdo do aplicativo.
+Esta versão foi criada **do zero em Kotlin + Jetpack Compose**, usando a arquitetura e a linguagem do projeto Arquivo Paranormal como base técnica.
 
-Entrada:
-`site/public/pages/index.html` (Site C/public)
+Importante:
+- NÃO usa WebView.
+- NÃO abre HTML por `file://`.
+- NÃO depende dos links do site para navegar.
+- NÃO usa Firebase.
+- Não copia a pasta `public` como páginas HTML: o conteúdo e a hierarquia foram reconstruídos como telas nativas.
+- Dados de usuários, sessão e chamados são locais via SharedPreferences.
 
 Hierarquia:
-- Gestor → `site/app/app.html` e módulos originais.
-- Cliente → `site/public/pages/cliente.html`.
-- Visitante → páginas públicas.
+Visitante → Home → páginas públicas → Login/Cadastro
+Cliente → Área do Cliente → Chatbot / AR / páginas públicas
+Gestor → Painel ERP → Geral / Estoque / Manutenção / RH / Ordens / Qualidade / Suprimentos / Produção / Logs / Sistema
 
-Firebase não foi incluído. Login, sessão, configurações, chamados e dados dos módulos usam armazenamento local.
+Contas:
+gestor@getech.local / 123456
+cliente@getech.local / 123456
 
-O chatbot original do Site C foi mantido e seus chamados continuam em `localStorage`.
-
-A página de Realidade Aumentada original foi mantida, incluindo o catálogo, Three.js e suporte do `model-viewer`; AR espacial real continua dependente do suporte do aparelho/modelos e de recursos externos.
+A Realidade Aumentada usa câmera nativa como base e HUD de inspeção; AR espacial 3D real depende de ARCore/modelos 3D.
