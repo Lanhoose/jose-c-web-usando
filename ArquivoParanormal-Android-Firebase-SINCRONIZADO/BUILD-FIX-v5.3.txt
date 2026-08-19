@@ -1,0 +1,9 @@
+v5.3 compile correction
+
+Codemagic reported exactly two Kotlin errors:
+1. MainActivity.kt: try/catch around a @Composable invocation is illegal in Compose.
+   Fixed by moving startup exception handling outside setContent and removing the composable try/catch.
+2. ui/GeTechApp.kt: `route = if (...) Route.Login else goAfterLogin()` inferred Any because
+   goAfterLogin returns Unit. Fixed by making onLogin an explicit if/else without assignment.
+
+No Firebase added.
