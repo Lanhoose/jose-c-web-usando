@@ -1,8 +1,0 @@
-<resources>
-    <style name="Theme.GeTech" parent="android:style/Theme.Material.Light.NoActionBar">
-        <item name="android:fontFamily">sans</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">#4A69E8</item>
-        <item name="android:navigationBarColor">#F7F8FA</item>
-    </style>
-</resources>
