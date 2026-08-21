@@ -15,6 +15,25 @@ workflows:
           test -f settings.gradle.kts
           test -f app/build.gradle.kts
 
+          # O gradle-wrapper.jar (binário) não está no repositório. Sem ele o
+          # ./gradlew falha de cara com "Could not find or load main class
+          # org.gradle.wrapper.GradleWrapperMain". Baixamos o jar certo,
+          # lendo a versão diretamente do gradle-wrapper.properties do
+          # projeto (não fica hardcoded aqui, então se você atualizar o
+          # Gradle no futuro isso continua funcionando sozinho).
+          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "gradle-wrapper.jar ausente; baixando..."
+            GRADLE_VERSION=$(sed -n 's/.*gradle-\([0-9.]*\)-bin\.zip.*/\1/p' gradle/wrapper/gradle-wrapper.properties)
+            if [ -z "$GRADLE_VERSION" ]; then
+              echo "Não foi possível detectar a versão do Gradle em gradle-wrapper.properties" >&2
+              exit 1
+            fi
+            echo "Versão do Gradle detectada: $GRADLE_VERSION"
+            mkdir -p gradle/wrapper
+            curl -fsSL -o gradle/wrapper/gradle-wrapper.jar \
+              "https://raw.githubusercontent.com/gradle/gradle/v${GRADLE_VERSION}/gradle/wrapper/gradle-wrapper.jar"
+          fi
+
       - name: Compilar APK Debug
         script: |
           cd ArquivoParanormal-Android-Firebase-SINCRONIZADO
