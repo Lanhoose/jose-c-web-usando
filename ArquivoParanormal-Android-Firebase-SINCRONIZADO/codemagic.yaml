@@ -1,0 +1,71 @@
+workflows:
+  android-debug-apk:
+    name: Arquivo Paranormal - Android APK
+    instance_type: linux_x2
+    max_build_duration: 120
+
+    environment:
+      ubuntu: 24.04
+      java: 21
+
+    scripts:
+      - name: Prepare Gradle wrapper
+        script: |
+          chmod +x ./gradlew
+
+          # Regenera o gradle-wrapper.jar na versão declarada em
+          # gradle-wrapper.properties (lida dinamicamente, não fica
+          # hardcoded aqui). Usa o Gradle já instalado na imagem do
+          # Codemagic quando disponível; se não, baixa o jar certo direto do
+          # repositório oficial como reserva.
+          GRADLE_VERSION=$(sed -n 's/.*gradle-\([0-9.]*\)-bin\.zip.*/\1/p' gradle/wrapper/gradle-wrapper.properties)
+          if [ -z "$GRADLE_VERSION" ]; then
+            echo "Não foi possível detectar a versão do Gradle em gradle-wrapper.properties" >&2
+            exit 1
+          fi
+          echo "Versão do Gradle detectada: $GRADLE_VERSION"
+
+          if command -v gradle >/dev/null 2>&1; then
+            gradle wrapper --gradle-version "$GRADLE_VERSION" --distribution-type bin
+          else
+            echo "Comando 'gradle' indisponível na imagem; baixando gradle-wrapper.jar diretamente"
+            mkdir -p gradle/wrapper
+            curl -fsSL -o gradle/wrapper/gradle-wrapper.jar \
+              "https://raw.githubusercontent.com/gradle/gradle/v${GRADLE_VERSION}/gradle/wrapper/gradle-wrapper.jar"
+          fi
+
+      - name: Configure local.properties from Firebase
+        script: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("app/google-services.json").read_text())
+
+          project_info = data.get("project_info", {})
+          client = data.get("client", [{}])[0]
+          client_info = client.get("client_info", {})
+          api_keys = client.get("api_key", [])
+
+          values = {
+              "firebase.apiKey": api_keys[0].get("current_key", "") if api_keys else "",
+              "firebase.appId": client_info.get("mobilesdk_app_id", ""),
+              "firebase.projectId": project_info.get("project_id", ""),
+              "firebase.messagingSenderId": project_info.get("project_number", ""),
+              "firebase.storageBucket": project_info.get("storage_bucket", ""),
+          }
+
+          Path("local.properties").write_text(
+              "\n".join(f"{k}={v}" for k, v in values.items()) + "\n"
+          )
+          PY
+
+          echo "Android SDK: $ANDROID_SDK_ROOT"
+
+      - name: Build Android debug APK
+        script: |
+          ./gradlew assembleDebug --stacktrace
+
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
+      - app/build/outputs/**/*.mapping.txt
