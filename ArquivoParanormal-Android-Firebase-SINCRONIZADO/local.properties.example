@@ -1,7 +1,0 @@
-# Copie para local.properties (não versione este arquivo).
-# Os valores são encontrados nas configurações do app Android no Firebase.
-firebase.apiKey=
-firebase.appId=
-firebase.projectId=
-firebase.messagingSenderId=
-firebase.storageBucket=
