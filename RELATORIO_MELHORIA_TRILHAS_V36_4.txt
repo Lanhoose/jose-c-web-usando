@@ -1,0 +1,18 @@
+V36.4 — MELHORIA DA ETAPA DE TRILHA
+
+Alterações realizadas:
+- A etapa 6 agora explica explicitamente que a trilha é escolhida em NEX 10% e possui progressão em NEX 10%, 40%, 65% e 99%.
+- Ao selecionar uma trilha, a tela mostra o resumo da função da trilha.
+- A tela passa a listar cada habilidade da trilha com NEX, nome e descrição.
+- Cada habilidade recebe estado visual: AGORA, LIBERADO ou BLOQUEADO.
+- O jogador consegue visualizar benefícios futuros antes de confirmar a trilha.
+- Foi incluída uma observação separando habilidades concedidas pela trilha de poderes opcionais que precisam ser escolhidos separadamente.
+- Se uma trilha não estiver catalogada, o aplicativo informa isso em vez de inventar benefícios.
+- Não foram removidas funcionalidades da criação de personagem.
+
+Base das regras:
+O Livro de Regras Oficial estabelece que a trilha é escolhida em NEX 10% e que novas habilidades são recebidas em NEX 40%, 65% e 99%.
+As descrições e habilidades exibidas usam o catálogo de trilhas já existente no projeto.
+
+Verificação de build:
+Não foi possível concluir uma compilação local neste ambiente porque o Gradle Wrapper tentou baixar Gradle 9.3.1 e o ambiente não possui acesso à internet. Portanto, o ZIP foi atualizado, mas a build final deve ser confirmada no Codemagic.
