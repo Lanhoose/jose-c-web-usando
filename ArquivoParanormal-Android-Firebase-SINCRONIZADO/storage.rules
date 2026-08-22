@@ -1,0 +1,28 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isMaster() {
+      return signedIn()
+        && firestore.get(/databases/(default)/documents/usuarios/$(request.auth.uid)).data.role == 'mestre';
+    }
+
+    match /campanhas/principal/audio/{fileName} {
+      allow read: if signedIn();
+      allow create: if isMaster()
+        && request.resource.size < 50 * 1024 * 1024
+        && request.resource.contentType.matches('audio/.*');
+      allow update: if isMaster()
+        && request.resource.size < 50 * 1024 * 1024
+        && request.resource.contentType.matches('audio/.*');
+      allow delete: if isMaster();
+    }
+
+    // A foto de perfil não usa mais o Firebase Storage: fica salva
+    // localmente no aparelho e só uma miniatura é sincronizada pelo
+    // Firestore (usuarios/{uid}.photoThumb). A regra de
+    // usuarios/{userId}/perfil.jpg foi removida por não ter mais uso.
+  }
+}
